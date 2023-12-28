@@ -19,7 +19,6 @@ def do_pack():
         compressed = "versions/web_static_{}.tgz".format(file_time)
         target = "web_static/"
         local('{} {} {}'.format(command, compressed, target))
-
         return compressed
     except Exception as e:
         return None
