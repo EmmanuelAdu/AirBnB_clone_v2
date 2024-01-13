@@ -1,25 +1,23 @@
-#!/usr/bin/python3
-""" City Module for HBNB project """
-from models.base_model import BaseModel
-from sqlalchemy import Column, Integer, String, ForeignKey
-from sqlalchemy.orm import relationship
+#!/usr/bin/python
+""" holds class City"""
 import models
-import sqlalchemy
+from models.base_model import BaseModel, Base
 from os import getenv
+import sqlalchemy
+from sqlalchemy import Column, String, ForeignKey
+from sqlalchemy.orm import relationship
 
 
-class City(BaseModel):
-    """Adding attributes that reference to BaseModel"""
+class City(BaseModel, Base):
+    """Representation of city """
     if getenv("HBNB_TYPE_STORAGE") == "db":
-        __tablename__ = "cities"
-
-        name = Column(String(128),
-                      nullable=False)
-        state_id = Column(String(60),
-                          ForeignKey("states.id"))
+        __tablename__ = 'cities'
+        state_id = Column(String(60), ForeignKey('states.id'), nullable=False)
+        name = Column(String(128), nullable=False)
+        places = relationship("Place", backref="cities")
     else:
-        name = ""
         state_id = ""
+        name = ""
 
     def __init__(self, *args, **kwargs):
         """initializes city"""
