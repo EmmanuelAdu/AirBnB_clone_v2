@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Starts a web application
+"""
+Starts a web application
 """
 
 
